@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# install git
+# git
 # https://git-scm.com/book/en/v2/Getting-Started-Installing-Git
 if ! command -v git &> /dev/null; then
   printf 'installing git \r'
@@ -17,7 +17,7 @@ git config --global user.name $GITHUB_USERNAME
 git config --global user.email $GITHUB_USEREMAIL
 ssh-keygen -t rsa -C "$GITHUB_USEREMAIL"
 
-# install ohmyzsh
+# ohmyzsh
 # https://github.com/ohmyzsh/ohmyzsh
 if ! command -v zsh &> /dev/null; then
   printf 'installing ohmyzsh \r'
@@ -27,11 +27,27 @@ else
   printf 'ohmyzsh already installed \n'
 fi
 
-# config zsh plugins
+# zsh plugins
+# install zsh-autosuggestions
+# https://github.com/zsh-users/zsh-autosuggestions/blob/master/INSTALL.md#oh-my-zsh
+git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 
-# config zsh with pk10
+# install zsh-syntax-highlighting.git
+# https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/INSTALL.md#in-your-zshrc
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git
+echo "source ${(q-)PWD}/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" >> ${ZDOTDIR:-$HOME}/.zshrc
 
-# install nvm
+# pk10
+# https://github.com/romkatv/powerlevel10k#oh-my-zsh
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+p10k configure
+
+# enhance keyboard
+echo "bindkey "\e\e[D" backward-word" >> ${ZDOTDIR:-$HOME}/.zshrc
+echo "bindkey "\e\e[C" backward-word" >> ${ZDOTDIR:-$HOME}/.zshrc
+
+# nvm
+# https://github.com/nvm-sh/nvm
 if ! command -v nvm &> /dev/null; then
   printf 'installing nvm \r'
   curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | sh
@@ -40,8 +56,12 @@ else
   printf 'nvm already installed \n'
 fi
 
-# install lts nodejs
+echo "export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion" >> ${ZDOTDIR:-$HOME}/.zshrc
 
+# install lts nodejs
+nvm install lts
 
 # install homebrew
 # https://brew.sh/
@@ -52,6 +72,22 @@ if ! command -v brew &> /dev/null; then
 else
   printf 'homebrew already installed \n'
 fi
+
+# awesome cli tools
+# trash
+# https://github.com/sindresorhus/trash
+npm install trash -g
+
+# gh-quick-command
+# https://github.com/JiangWeixian/gh-quick-command
+npm install gh-quick-command -g
+
+# unrar
+brew install unrar
+
+# grex
+# https://github.com/pemistahl/grex
+brew install grex
 
 # install alfred
 printf 'installing alfred \r'
