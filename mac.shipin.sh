@@ -61,7 +61,7 @@ echo "export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion" >> ${ZDOTDIR:-$HOME}/.zshrc
 
 # install lts nodejs
-nvm install lts
+nvm install --lts
 
 # install homebrew
 # https://brew.sh/
