@@ -43,7 +43,7 @@ p10k configure
 
 # enhance keyboard
 echo "bindkey "\e\e[D" backward-word" >> ${ZDOTDIR:-$HOME}/.zshrc
-echo "bindkey "\e\e[C" backward-word" >> ${ZDOTDIR:-$HOME}/.zshrc
+echo "bindkey "\e\e[C" forward-word" >> ${ZDOTDIR:-$HOME}/.zshrc
 
 # nvm
 # https://github.com/nvm-sh/nvm
