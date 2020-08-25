@@ -101,6 +101,8 @@ brew cask install alfred-theme-simple
 printf 'installed alfred simple theme \r'
 
 # config alfred workflows
+curl -s  https://raw.githubusercontent.com/TheColdVoid/nbnhhsh/master/nbnhhsh.alfredworkflow -o nbnhhsh.alfredworkflow
+open nbnhhsh.alfredworkflow
 
 apps=(wechat iterm2 qq charles notion google-chrome visual-studio-code enpass switchhosts slack)
 for app in ${apps[@]}; do
