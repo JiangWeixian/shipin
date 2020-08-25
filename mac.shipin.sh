@@ -93,6 +93,13 @@ printf 'installing alfred \r'
 brew cask install alfred
 printf 'installed alfred \n'
 
+# use alfred-simple theme
+# https://github.com/sindresorhus/alfred-simple
+printf 'installing alfred simple theme \r'
+brew tap danielbayley/alfred
+brew cask install alfred-theme-simple
+printf 'installed alfred simple theme \r'
+
 # config alfred workflows
 
 apps=(wechat iterm2 qq charles notion google-chrome visual-studio-code enpass switchhosts slack)
