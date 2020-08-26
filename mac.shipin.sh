@@ -81,6 +81,10 @@ npm install trash -g
 # https://github.com/JiangWeixian/gh-quick-command
 npm install gh-quick-command -g
 
+# tldr
+# https://github.com/tldr-pages/tldr
+npm install tldr -g
+
 # unrar
 brew install unrar
 
@@ -104,7 +108,7 @@ printf 'installed alfred simple theme \r'
 curl -s  https://raw.githubusercontent.com/TheColdVoid/nbnhhsh/master/nbnhhsh.alfredworkflow -o nbnhhsh.alfredworkflow
 open nbnhhsh.alfredworkflow
 
-apps=(wechat iterm2 qq charles notion google-chrome visual-studio-code enpass switchhosts slack)
+apps=(wechat iterm2 qq charles notion google-chrome visual-studio-code enpass switchhosts slack kap)
 for app in ${apps[@]}; do
   printf 'installing %s \r' ${app}
   brew cask install $app
