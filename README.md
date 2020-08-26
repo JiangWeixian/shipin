@@ -1,6 +1,24 @@
+help you ship into a new mac
+
 ## requirements
 
 - [trojan-qt5]()
+
+## features
+
+- install git
+  - config git
+  - generate sshkey
+- install zsh
+  - config with [p10k](https://github.com/romkatv/powerlevel10k#oh-my-zsh)
+  - install plugins
+- install nvm
+  - install lts nodejs
+- install homebrew
+  - install lots of [apps](/mac.shipin.sh)..., like `switchhosts, vscode...`
+- install alfred
+  - set alfred-theme with [alfred-simple](alfred-theme-simple)
+- bind forward-word & backward-word
 
 ## todo
 
