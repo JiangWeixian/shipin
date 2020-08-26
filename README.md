@@ -4,14 +4,16 @@
 
 ## todo
 
-- [ ] [batch-add-workflows](https://www.alfredforum.com/topic/8842-how-to-programmatically-from-bashiterm-to-addimport-a-workflow-from-a-alfredworkflow-file/) - `unzip` maybe the best way to do it
+- [x] ~~[batch-add-workflows](https://www.alfredforum.com/topic/8842-how-to-programmatically-from-bashiterm-to-addimport-a-workflow-from-a-alfredworkflow-file/) - `unzip` maybe the best way to do it~~
 - [ ] batch add lot of plugins
 
 ## alfred workflows
-> self-use awesome alfred4 workflows
 
+alfred lack workflow manager, there are lists of self-use awesome alfred4 workflows, or just use `alfredworkflows.download.sh` to batch download all workflows
+
+- <https://github.com/jdno/alfred-gitignore> - gitignore workflows
 - <https://github.com/TheColdVoid/nbnhhsh> - abbreviations explanation
-- <http://www.packal.org/workflow/timezones-2>
+- <https://github.com/jaroslawhartman/TimeZones-Alfred>
 - <https://github.com/gillibrand/alfred-change-case> - change string case
 - <https://github.com/jasonshanks/alfred-workflow-toggle-airpods>
 - <https://github.com/LeEnno/alfred-terminalfinder> - open iterm2 in finder
