@@ -81,6 +81,10 @@ npm install trash -g
 # https://github.com/JiangWeixian/gh-quick-command
 npm install gh-quick-command -g
 
+# tldr
+# https://github.com/tldr-pages/tldr
+npm install tldr -g
+
 # unrar
 brew install unrar
 
