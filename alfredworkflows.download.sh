@@ -27,7 +27,7 @@ workflows=(
   https://raw.githubusercontent.com/jasonshanks/alfred-workflow-toggle-airpods/master/toggle-airpods.alfredworkflow
   # terminal-finder
   https://raw.githubusercontent.com/LeEnno/alfred-terminalfinder/master/TerminalFinder.alfredworkflow
-  # switch hosts
+  # switch apps
   https://github-production-release-asset-2e65be.s3.amazonaws.com/81984058/1a559a80-8496-11ea-86cf-ba21c5daf694?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAIWNJYAX4CSVEH53A%2F20200826%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20200826T143937Z&X-Amz-Expires=300&X-Amz-Signature=b860ee646a1fc7008d96c2824999af85c876917fe9d24096224db59350ec2c31&X-Amz-SignedHeaders=host&actor_id=6839576&key_id=0&repo_id=81984058&response-content-disposition=attachment%3B%20filename%3DSwift.Window.Switcher.v0.3.6.alfredworkflow&response-content-type=application%2Foctet-stream
 )
 
