@@ -102,7 +102,7 @@ printf 'installed alfred simple theme \r'
 
 # config alfred workflows
 
-apps=(wechat iterm2 qq charles notion google-chrome visual-studio-code enpass switchhosts slack)
+apps=(wechat iterm2 qq charles notion google-chrome visual-studio-code enpass switchhosts slack kap)
 for app in ${apps[@]}; do
   printf 'installing %s \r' ${app}
   brew cask install $app
