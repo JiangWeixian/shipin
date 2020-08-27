@@ -2,6 +2,12 @@
 
 # git
 # https://git-scm.com/book/en/v2/Getting-Started-Installing-Git
+ask() {
+  IFS= read -r -n 1 -p "❯ $1 y/n: " "$2"
+  echo
+}
+IS_INSTALL_GIT=y
+ask "install git" IS_INSTALL_GIT
 if ! command -v git &> /dev/null; then
   printf 'installing git \r'
   git --version
@@ -11,11 +17,14 @@ else
 fi
 
 # config git
-read -p 'github username: ' GITHUB_USERNAME
-read -p 'github useremail: ' GITHUB_USEREMAIL
-git config --global user.name $GITHUB_USERNAME
-git config --global user.email $GITHUB_USEREMAIL
-ssh-keygen -t rsa -C "$GITHUB_USEREMAIL"
+read -p '❯ config git y/n: ' IS_CONFIG_GITHUB
+if [ $IS_CONFIG_GITHUB = 'y' ]; then
+  read -p '❯ github username: ' GITHUB_USERNAME
+  read -p '❯ github useremail: ' GITHUB_USEREMAIL
+  git config --global user.name $GITHUB_USERNAME
+  git config --global user.email $GITHUB_USEREMAIL
+  ssh-keygen -t rsa -C "$GITHUB_USEREMAIL"
+fi
 
 # ohmyzsh
 # https://github.com/ohmyzsh/ohmyzsh
