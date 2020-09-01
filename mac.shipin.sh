@@ -145,7 +145,7 @@ if [ $IS_INSTALL_ALFRED_THEME = y ]; then
   printf 'installed alfred simple theme \r'
 fi
 
-apps=(wechat iterm2 qq charles notion google-chrome visual-studio-code enpass switchhosts slack kap)
+apps=(wechat iterm2 qq charles notion google-chrome visual-studio-code enpass switchhosts slack kap sequel-pro)
 for app in ${apps[@]}; do
   printf 'installing %s \r' ${app}
   brew cask install $app
