@@ -2,7 +2,7 @@
 
 # Request confirm
 ask() {
-  read -r -n 1 -p "❯ $1? y/n: " "$2"
+  read -r -n 1 -p "❯ would like $1? y/n: " "$2"
   echo
 }
 # Renders a text based list of options that can be selected by the
@@ -193,24 +193,24 @@ if [ $IS_INSTALL_BREW = y ]; then
 fi
 
 # awesome cli tools
-# trash
-# https://github.com/sindresorhus/trash
-npm install trash -g
-
-# gh-quick-command
-# https://github.com/JiangWeixian/gh-quick-command
-npm install gh-quick-command -g
-
-# tldr
-# https://github.com/tldr-pages/tldr
-npm install tldr -g
-
-# unrar
-brew install unrar
-
-# grex
-# https://github.com/pemistahl/grex
-brew install grex
+selecteds=()
+clitools=(npm-trash npm-gh-quick-command npm-tldr brew-unrar brew-grex)
+echo "Select one clitool using 「up/down」 keys to browse, 「left/right」 keys to select and enter to confirm:"
+echo
+select_option "${clitools[@]}"
+for idx in "${selecteds[@]}"; do
+  if [[ ${clitools[idx]} =~ (npm|brew)-([a-z-]+) ]]; then
+    case "${BASH_REMATCH[1]}" in
+      "npm")
+        npm install "${BASH_REMATCH[2]}" -g
+        ;;
+      "brew")
+        brew install "${BASH_REMATCH[2]}"
+        ;;
+    esac
+  fi
+done
+printf '\e]8;;https://github.com/JiangWeixian/shipin/blob/master/docs/clitools.md\e\\man-preview of clitools\e]8;;\e\\\n'
 
 # install alfred
 IS_INSTALL_ALFRED=y
@@ -232,10 +232,13 @@ if [ $IS_INSTALL_ALFRED_THEME = y ]; then
   printf 'installed alfred simple theme \r'
 fi
 
+selecteds=()
 apps=(wechat iterm2 qq charles notion google-chrome visual-studio-code enpass switchhosts slack kap sequel-pro)
-for app in ${apps[@]}; do
-  printf 'installing %s \r' ${app}
+echo "Select one clitool using 「up/down」 keys to browse, 「left/right」 keys to select and enter to confirm:"
+echo
+select_option "${apps[@]}"
+for idx in ${selecteds[@]}; do
+  printf 'installing %s \r' ${app[idx]}
   brew cask install $app
-  printf 'installed %s \n' ${app}
 done
 
