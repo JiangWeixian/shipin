@@ -21,7 +21,7 @@ curl "https://raw.githubusercontent.com/JiangWeixian/shipin/master/mac.shipin.sh
 - `homebrew`
   - install lots of [apps](/mac.shipin.sh)..., like `switchhosts, vscode...`
 - `alfred`
-  - set alfred-theme with [alfred-simple]([alfred-theme-simple](https://github.com/sindresorhus/alfred-simple))
+  - set alfred-theme with [alfred-theme-simple](https://github.com/sindresorhus/alfred-simple)
   - some [awesome-alfred-workflows](/docs/alfred.md)
 - bind `forward-word & backward-word`
 - some [awesome-cli-tools](/docs/clitools.md)
