@@ -131,15 +131,6 @@ if [ $IS_INSTALL_ZSH = y ]; then
   fi
 fi
 
-# zsh plugins
-# install zsh-autosuggestions
-# https://github.com/zsh-users/zsh-autosuggestions/blob/master/INSTALL.md#oh-my-zsh
-git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-
-# install zsh-syntax-highlighting.git
-# https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/INSTALL.md#in-your-zshrc
-git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
-
 # p10k
 # https://github.com/romkatv/powerlevel10k#oh-my-zsh
 IS_POWER10K=y
@@ -148,6 +139,41 @@ if [ $IS_POWER10K = y ]; then
   git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
   p10k configure
 fi
+
+plugins=(
+  git
+  z
+  zsh-autosuggestions
+  history
+  sudo
+  copyfile
+  copydir
+  git-extras
+  common-aliases
+  zsh-syntax-highlighting
+  osx
+)
+selecteds=()
+selected_plugins=()
+echo "Select zsh plugins using 「up/down」 keys to browse, 「left/right」 keys to select and enter to confirm:"
+echo
+select_option "${plugins[@]}"
+for idx in ${selecteds[@]}; do
+  selected_plugins+=(${plugins[idx]})
+  case "${plugins[idx]}" in
+    "zsh-autosuggestions")
+      git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+    ;;
+    "zsh-syntax-highlighting")
+      git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+    ;;
+  esac
+done
+printf '\e]8;;https://github.com/JiangWeixian/shipin/blob/master/docs/zshplugins.md\e\\details of zsh plugins\e]8;;\e\\\n'
+echo "copy below code and config to ~/.zshrc"
+echo "plugin=("
+printf "  %s \n" "${selected_plugins[@]}"
+echo ")"
 
 # enhance keyboard
 IS_BIND_ARROWKEY=y
@@ -195,7 +221,7 @@ fi
 # awesome cli tools
 selecteds=()
 clitools=(npm-trash npm-gh-quick-command npm-tldr brew-unrar brew-grex)
-echo "Select one clitool using 「up/down」 keys to browse, 「left/right」 keys to select and enter to confirm:"
+echo "Select clitool using 「up/down」 keys to browse, 「left/right」 keys to select and enter to confirm:"
 echo
 select_option "${clitools[@]}"
 for idx in "${selecteds[@]}"; do
@@ -234,7 +260,7 @@ fi
 
 selecteds=()
 apps=(wechat iterm2 qq charles notion google-chrome visual-studio-code enpass switchhosts slack kap sequel-pro)
-echo "Select one clitool using 「up/down」 keys to browse, 「left/right」 keys to select and enter to confirm:"
+echo "Select apps using 「up/down」 keys to browse, 「left/right」 keys to select and enter to confirm:"
 echo
 select_option "${apps[@]}"
 for idx in ${selecteds[@]}; do
