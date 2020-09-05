@@ -3,9 +3,8 @@
 # Renders a text based list of options that can be selected by the
 # user using up, down and enter keys and returns the chosen option.
 #
-#   Arguments   : list of options, maximum of 256
-#                 "opt1" "opt2" ...
-#   Return value: selected index (0 for opt1, 1 for opt2 ...)
+# Arguments   : list of options, maximum of 256
+# Return value: selected index (0 for opt1, 1 for opt2 ...)
 selecteds=()
 function select_option() {
 
@@ -86,17 +85,3 @@ function select_option() {
   printf "\n"
   cursor_blink_on
 }
-
-echo "Select one option using up/down keys and enter to confirm:"
-echo
-
-apps=(wechat iterm2 qq charles notion google-chrome visual-studio-code enpass switchhosts slack kap sequel-pro)
-
-select_option "${apps[@]}"
-# choice=$?
-
-for idx in "${selecteds[@]}"; do
-  echo "selecteds ${apps[idx]}"
-done
-# echo "Choosen index = $choice"
-# echo "        value = ${options[$choice]}"
