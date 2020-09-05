@@ -27,4 +27,4 @@ Temporary Items
 .apdisk
 
 # Test
-test.sh
+*.test.sh
