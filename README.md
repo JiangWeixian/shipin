@@ -28,7 +28,9 @@ curl "https://raw.githubusercontent.com/JiangWeixian/shipin/master/mac.shipin.sh
 
 ## todo
 
-- [x] ~~[batch-add-workflows](https://www.alfredforum.com/topic/8842-how-to-programmatically-from-bashiterm-to-addimport-a-workflow-from-a-alfredworkflow-file/) - `unzip` maybe the best way to do it~~
+- [ ] add usage screenshot
 - [ ] batch add lot of plugins
+- [x] ~~[batch-add-workflows](https://www.alfredforum.com/topic/8842-how-to-programmatically-from-bashiterm-to-addimport-a-workflow-from-a-alfredworkflow-file/) - `unzip` maybe the best way to do it~~
+
 
 
