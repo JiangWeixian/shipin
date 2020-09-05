@@ -1,0 +1,5 @@
+- [unrar]() - unrar `.rar`
+- [trash](https://github.com/sindresorhus/trash)
+- [gh-quick-command](https://github.com/JiangWeixian/gh-quick-command)
+- [tldr](https://github.com/tldr-pages/tldr)
+- [grex](https://github.com/pemistahl/grex)
