@@ -2,7 +2,7 @@
 
 # Request confirm
 ask() {
-  read -r -n 1 -p "❯ would like $1? y/n: " "$2"
+  read -r -n 1 -p "❯ Would you like to $1? y/n: " "$2"
   echo
 }
 # Renders a text based list of options that can be selected by the
@@ -94,9 +94,9 @@ function select_option() {
 # https://git-scm.com/book/en/v2/Getting-Started-Installing-Git
 IS_INSTALL_GIT=y
 IS_CONFIG_GITHUB=y
+clear
 ask "install git" IS_INSTALL_GIT
-ask "config git" IS_CONFIG_GITHUB
-if [ $IS_INSTALL_GIT = y ]; then
+if [ $IS_INSTALL_GIT == y ]; then
   if ! command -v git &> /dev/null; then
     printf 'installing git \r'
     git --version
@@ -107,21 +107,25 @@ if [ $IS_INSTALL_GIT = y ]; then
 fi
 
 # config git
-if [ $IS_CONFIG_GITHUB=y ]; then
-  if [ $IS_CONFIG_GITHUB = y ]; then
-    read -p '❯ github username: ' GITHUB_USERNAME
-    read -p '❯ github useremail: ' GITHUB_USEREMAIL
-    git config --global user.name $GITHUB_USERNAME
-    git config --global user.email $GITHUB_USEREMAIL
-    ssh-keygen -t rsa -C "$GITHUB_USEREMAIL"
-  fi
+ask "config git" IS_CONFIG_GITHUB
+if [ $IS_CONFIG_GITHUB == y ]; then
+  clear
+  read -p '❯ Please github username: ' GITHUB_USERNAME
+  read -p '❯ Please github useremail: ' GITHUB_USEREMAIL
+fi
+
+if [ $IS_CONFIG_GITHUB == y ]; then
+  git config --global user.name $GITHUB_USERNAME
+  git config --global user.email $GITHUB_USEREMAIL
+  ssh-keygen -t rsa -C "$GITHUB_USEREMAIL"
 fi
 
 # ohmyzsh
 # https://github.com/ohmyzsh/ohmyzsh
 IS_INSTALL_ZSH=y
+clear
 ask "install ohmyzsh" IS_INSTALL_ZSH
-if [ $IS_INSTALL_ZSH = y ]; then
+if [ $IS_INSTALL_ZSH == y ]; then
   if ! command -v zsh &> /dev/null; then
     printf 'installing ohmyzsh \r'
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
@@ -129,15 +133,15 @@ if [ $IS_INSTALL_ZSH = y ]; then
   else
     printf 'ohmyzsh already installed \n'
   fi
+  clear
 fi
 
-# p10k
-# https://github.com/romkatv/powerlevel10k#oh-my-zsh
 IS_POWER10K=y
-ask "boot ohmyzsh with powerlevel10k" IS_POWER10K
-if [ $IS_POWER10K = y ]; then
-  git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
-  p10k configure
+ask "bootstrap ohmyzsh with powerlevel10k" IS_POWER10K
+if [ $IS_POWER10K == y ]; then
+  git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k"
+  echo "- Please ZSH_THEME="powerlevel10k/powerlevel10k" in ~/.zshrc"
+  echo
 fi
 
 plugins=(
@@ -153,27 +157,32 @@ plugins=(
   zsh-syntax-highlighting
   osx
 )
-selecteds=()
-selected_plugins=()
-echo "Select zsh plugins using 「up/down」 keys to browse, 「left/right」 keys to select and enter to confirm:"
-echo
-select_option "${plugins[@]}"
-for idx in ${selecteds[@]}; do
-  selected_plugins+=(${plugins[idx]})
-  case "${plugins[idx]}" in
-    "zsh-autosuggestions")
-      git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-    ;;
-    "zsh-syntax-highlighting")
-      git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
-    ;;
-  esac
-done
-printf '\e]8;;https://github.com/JiangWeixian/shipin/blob/master/docs/zshplugins.md\e\\details of zsh plugins\e]8;;\e\\\n'
-echo "copy below code and config to ~/.zshrc"
-echo "plugin=("
-printf "  %s \n" "${selected_plugins[@]}"
-echo ")"
+IS_CONFIG_ZSH_PLGUINS=y
+ask "config zsh plugins" IS_CONFIG_ZSH_PLGUINS
+if [ $IS_CONFIG_ZSH_PLGUINS == y ]; then
+  selecteds=()
+  selected_plugins=()
+  printf '%s Please Check this files about \e]8;;https://github.com/JiangWeixian/shipin/blob/master/docs/zshplugins.md\e\\details of zsh plugins\e]8;;\e\\\n' -
+  echo "- Select zsh plugins using 「up/down」 keys to browse, 「left/right」 keys to select and 「enter」 to confirm:"
+  echo
+  select_option "${plugins[@]}"
+  for idx in ${selecteds[@]}; do
+    selected_plugins+=(${plugins[idx]})
+    case "${plugins[idx]}" in
+      "zsh-autosuggestions")
+        git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+      ;;
+      "zsh-syntax-highlighting")
+        git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+      ;;
+    esac
+  done
+  echo "- Please copy below code and config to ~/.zshrc"
+  echo
+  echo "plugin=("
+  printf "  %s \n" "${selected_plugins[@]}"
+  echo ")"
+fi
 
 # enhance keyboard
 IS_BIND_ARROWKEY=y
@@ -187,7 +196,8 @@ fi
 # https://github.com/nvm-sh/nvm
 IS_INSTALL_NVM=y
 ask "install nvm" IS_INSTALL_NVM
-if [ $IS_INSTALL_NVM=y ]; then
+if [ $IS_INSTALL_NVM == y ]; then
+  clear
   if ! command -v nvm &> /dev/null; then
     printf 'installing nvm \r'
     curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | sh
@@ -202,13 +212,21 @@ if [ $IS_INSTALL_NVM=y ]; then
     printf 'nvm already installed \n'
   fi
 fi
-
+IS_INSTALL_LTS_NODEJS=y
+ask "install lts nodejs" IS_INSTALL_LTS_NODEJS
+if [ $IS_INSTALL_LTS_NODEJS == y ]; then
+  clear
+  source ~/.nvm/nvm.sh
+  # install lts nodejs
+  nvm install --lts
+fi
 
 # install homebrew
 # https://brew.sh/
 IS_INSTALL_BREW=y
 ask "install homebrew" IS_INSTALL_BREW
-if [ $IS_INSTALL_BREW = y ]; then
+if [ $IS_INSTALL_BREW == y ]; then
+  clear
   if ! command -v brew &> /dev/null; then
     printf 'installing homebrew \r'
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
@@ -219,31 +237,38 @@ if [ $IS_INSTALL_BREW = y ]; then
 fi
 
 # awesome cli tools
-selecteds=()
-clitools=(npm-trash npm-gh-quick-command npm-tldr brew-unrar brew-grex)
-echo "Select clitool using 「up/down」 keys to browse, 「left/right」 keys to select and enter to confirm:"
-echo
-select_option "${clitools[@]}"
-for idx in "${selecteds[@]}"; do
-  if [[ ${clitools[idx]} =~ (npm|brew)-([a-z-]+) ]]; then
-    case "${BASH_REMATCH[1]}" in
-      "npm")
-        npm install "${BASH_REMATCH[2]}" -g
-        ;;
-      "brew")
-        brew install "${BASH_REMATCH[2]}"
-        ;;
-    esac
-  fi
-done
-printf '\e]8;;https://github.com/JiangWeixian/shipin/blob/master/docs/clitools.md\e\\man-preview of clitools\e]8;;\e\\\n'
+IS_INSTALL_AWESOME_CLITOOLS=y
+if [ $IS_INSTALL_AWESOME_CLITOOLS == y ]; then
+  clear
+  selecteds=()
+  clitools=(npm-trash npm-gh-quick-command npm-tldr brew-unrar brew-grex)
+  printf '%s Please check this files about \e]8;;https://github.com/JiangWeixian/shipin/blob/master/docs/clitools.md\e\\details of clitools\e]8;;\e\\\n' -
+  echo "- Select clitool using 「up/down」 keys to browse, 「left/right」 keys to select and 「enter」 to confirm:"
+  echo
+  select_option "${clitools[@]}"
+  for idx in "${selecteds[@]}"; do
+    if [[ ${clitools[idx]} =~ (npm|brew)-([a-z-]+) ]]; then
+      case "${BASH_REMATCH[1]}" in
+        "npm")
+          echo "installing ${clitools[idx]}"
+          npm install "${BASH_REMATCH[2]}" -g
+          ;;
+        "brew")
+          echo "installing ${clitools[idx]}"
+          brew install "${BASH_REMATCH[2]}"
+          ;;
+      esac
+    fi
+  done
+fi
 
 # install alfred
 IS_INSTALL_ALFRED=y
 IS_INSTALL_ALFRED_THEME=y
 ask "install alfred" IS_INSTALL_ALFRED
 ask "install alfred-simple theme" IS_INSTALL_ALFRED_THEME
-if [ $IS_INSTALL_ALFRED = y ]; then
+if [ $IS_INSTALL_ALFRED == y ]; then
+  clear
   printf 'installing alfred \r'
   brew cask install alfred
   printf 'installed alfred \n'
@@ -251,20 +276,24 @@ fi
 
 # use alfred-simple theme
 # https://github.com/sindresorhus/alfred-simple
-if [ $IS_INSTALL_ALFRED_THEME = y ]; then
+if [ $IS_INSTALL_ALFRED_THEME == y ]; then
+  clear
   printf 'installing alfred simple theme \r'
   brew tap danielbayley/alfred
   brew cask install alfred-theme-simple
   printf 'installed alfred simple theme \r'
 fi
 
-selecteds=()
-apps=(wechat iterm2 qq charles notion google-chrome visual-studio-code enpass switchhosts slack kap sequel-pro)
-echo "Select apps using 「up/down」 keys to browse, 「left/right」 keys to select and enter to confirm:"
-echo
-select_option "${apps[@]}"
-for idx in ${selecteds[@]}; do
-  printf 'installing %s \r' ${app[idx]}
-  brew cask install $app
-done
-
+IS_INSTALL_AWESOME_APPS=y
+if [ $IS_INSTALL_AWESOME_APPS == y ]; then
+  clear
+  selecteds=()
+  apps=(wechat iterm2 qq charles notion google-chrome visual-studio-code enpass switchhosts slack kap sequel-pro)
+  echo "- Select apps using 「up/down」 keys to browse, 「left/right」 keys to select and 「enter」 to confirm:"
+  echo
+  select_option "${apps[@]}"
+  for idx in ${selecteds[@]}; do
+    echo "installing ${apps[idx]}"
+    brew cask install ${apps[idx]}
+  done
+fi
