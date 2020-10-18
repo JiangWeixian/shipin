@@ -1,14 +1,18 @@
-# 🚢
+# 🚢 shipin
 
-help you ship into a new mac
+help you ship into a new mac in interactive way
 
-## usage
+<img src="https://user-images.githubusercontent.com/6839576/96358317-801a9a80-1138-11eb-98e0-62f3f0fdaf65.gif" width="1000" />
+
+*▲ 🚢 shipin*
+
+## 📝 usage
 
 ```bash
 curl "https://raw.githubusercontent.com/JiangWeixian/shipin/master/mac.shipin.sh" | sh
 ```
 
-## features
+## ✨ features
 > it will...
 
 - `git`
@@ -24,13 +28,11 @@ curl "https://raw.githubusercontent.com/JiangWeixian/shipin/master/mac.shipin.sh
   - set alfred-theme with [alfred-theme-simple](https://github.com/sindresorhus/alfred-simple)
   - some [awesome-alfred-workflows](/docs/alfred.md)
 - bind `forward-word & backward-word`
-- some [awesome-cli-tools](/docs/clitools.md)
+- install some [awesome-cli-tools](/docs/clitools.md)
 
-## todo
+# 
+<div align='right'>
 
-- [ ] add usage screenshot
-- [ ] batch add lot of plugins
-- [x] ~~[batch-add-workflows](https://www.alfredforum.com/topic/8842-how-to-programmatically-from-bashiterm-to-addimport-a-workflow-from-a-alfredworkflow-file/) - `unzip` maybe the best way to do it~~
+*built with ❤️ by JiangWeixian*
 
-
-
+</div>

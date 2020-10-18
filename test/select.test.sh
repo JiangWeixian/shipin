@@ -85,3 +85,6 @@ function select_option() {
   printf "\n"
   cursor_blink_on
 }
+
+clitools=(npm-trash npm-gh-quick-command npm-tldr brew-unrar brew-grex)
+select_option "${clitools[@]}"
