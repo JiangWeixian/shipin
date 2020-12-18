@@ -1,3 +1,8 @@
+# required
+#   - fzf, ag
+#   - git
+#   - zsh plugin: copyfile
+
 # git
 fbr() {
   local branches branch
@@ -35,3 +40,18 @@ fh() {
 }
 
 # copyfile
+alias filter="ag -g '' --ignore-dir node_modules"
+# fe - open file
+fe() {
+  IFS=$'\n' files=($(filter | fzf-tmux --query="$1" --multi --select-1 --exit-0))
+  [[ -n "$files" ]] && ${EDITOR:-vim} "${files[@]}"
+}
+fce() {
+  IFS=$'\n' files=($(filter | fzf-tmux --query="$1" --multi --select-1 --exit-0))
+  [[ -n "$files" ]] && code ${files[@]}
+}
+# cc - copy files
+cc() {
+  IFS=$'\n' files=($(filter | fzf-tmux --query="$1" --multi --select-1 --exit-0))
+  [[ -n "$files" ]] && copyfile ${files[@]}
+}
