@@ -46,7 +46,7 @@ fe() {
   IFS=$'\n' files=($(filter | fzf-tmux --query="$1" --multi --select-1 --exit-0))
   [[ -n "$files" ]] && ${EDITOR:-vim} "${files[@]}"
 }
-fce() {
+fcode() {
   IFS=$'\n' files=($(filter | fzf-tmux --query="$1" --multi --select-1 --exit-0))
   [[ -n "$files" ]] && code ${files[@]}
 }
