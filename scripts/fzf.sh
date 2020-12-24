@@ -55,3 +55,8 @@ cc() {
   IFS=$'\n' files=($(filter | fzf-tmux --query="$1" --multi --select-1 --exit-0))
   [[ -n "$files" ]] && copyfile ${files[@]}
 }
+# falias - find alias
+# falias - find alias
+falias() {
+  IFS=$'\n' files=($(alias | fzf-tmux --query="$1" --multi --select-1 --exit-0))
+}
