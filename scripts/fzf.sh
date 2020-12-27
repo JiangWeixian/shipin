@@ -56,7 +56,6 @@ cc() {
   [[ -n "$files" ]] && copyfile ${files[@]}
 }
 # falias - find alias
-# falias - find alias
 falias() {
   IFS=$'\n' files=($(alias | fzf-tmux --query="$1" --multi --select-1 --exit-0))
 }
