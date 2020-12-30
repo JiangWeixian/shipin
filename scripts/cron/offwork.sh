@@ -1,3 +1,3 @@
 # offwork
 
-osascript -e 'display notification "休息休息" with title "'"$USER"', 早点下班呀～"'
+osascript -e 'display notification "GOGOGOGO HOME!!!" with title "'"$USER"', time to off work～"'
