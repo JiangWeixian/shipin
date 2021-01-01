@@ -13,7 +13,7 @@ BASEDIR=$(dirname $0)
 
 echo "0 11 * * * sh $PWD/$BASEDIR/greet.sh" >> exitedcron
 echo "0 21 * * * sh $PWD/$BASEDIR/offwork.sh" >> exitedcron
-echo "* * * * * sh $PWD/$BASEDIR/drinkwater.sh" >> exitedcron
+echo "0 * * * * sh $PWD/$BASEDIR/drinkwater.sh" >> exitedcron
 
 # uniq cron
 sort exitedcron | uniq > uniqcron

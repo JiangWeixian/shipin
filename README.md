@@ -12,6 +12,18 @@ help you ship into a new mac in interactive way
 curl "https://raw.githubusercontent.com/JiangWeixian/shipin/master/mac.shipin.sh" | sh
 ```
 
+### install crontab
+
+```sh
+# git clone repo
+cd shipin
+sh scripts/cron/install.sh
+```
+
+- **"0 11 * * * sh $PWD/$BASEDIR/greet.sh"** - say hello at `11:00am`
+- **"0 21 * * * sh $PWD/$BASEDIR/offwork.sh"** - time to offwork at `21:00pm`
+- **"0 * * * * sh $PWD/$BASEDIR/drinkwater.sh"** - `@hourly` remind drink water
+
 ## ✨ features
 > it will...
 
@@ -29,6 +41,7 @@ curl "https://raw.githubusercontent.com/JiangWeixian/shipin/master/mac.shipin.sh
   - some [awesome-alfred-workflows](/docs/alfred.md)
 - bind `forward-word & backward-word`
 - install some [awesome-cli-tools](/docs/clitools.md)
+- install useful crontab
 
 # 
 <div align='right'>
