@@ -151,11 +151,11 @@ plugins=(
   history
   sudo
   copyfile
-  copydir
+  copypaths
   git-extras
   common-aliases
+  macos
   zsh-syntax-highlighting
-  osx
 )
 IS_CONFIG_ZSH_PLGUINS=y
 ask "config zsh plugins" IS_CONFIG_ZSH_PLGUINS
