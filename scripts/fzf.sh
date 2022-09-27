@@ -11,6 +11,15 @@ fbr() {
   git checkout $(echo "$branch" | awk '{print $1}' | sed "s/.* //")
 }
 
+# including remote branches
+# fbr() {
+#   local branches branch
+#   branches=$(git branch --all --sort=-committerdate | grep -v HEAD) &&
+#   branch=$(echo "$branches" |
+#            fzf-tmux -d $(( 2 + $(wc -l <<< "$branches") )) +m) &&
+#   git checkout $(echo "$branch" | sed "s/.* //" | sed "s#remotes/[^/]*/##")
+# }
+
 fcs() {
   local commits commit
   commits=$(git log --color=always --pretty=oneline --abbrev-commit --reverse) &&
@@ -59,3 +68,5 @@ cc() {
 falias() {
   IFS=$'\n' files=($(alias | fzf-tmux --query="$1" --multi --select-1 --exit-0))
 }
+
+alias rebase='grbi `fcs`'
