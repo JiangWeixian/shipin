@@ -1,5 +1,5 @@
 # required
-#   - fzf, ag
+#   - fzf, ag: https://github.com/ggreer/the_silver_searcher
 #   - git
 #   - zsh plugin: copyfile
 
