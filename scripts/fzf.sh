@@ -29,18 +29,18 @@ fcs() {
 alias rebase='git rebase -i `fcs`'
 
 # z
-unalias z
-z() {
+zz() {
   if [[ -z "$*" ]]; then
-    cd "$(_z -l 2>&1 | fzf +s --tac | sed 's/^[0-9,.]* *//')"
+    cd "$(z -l 2>&1 | fzf +s --tac | sed 's/^[0-9,.]* *//')"
   else
     _last_z_args="$@"
     _z "$@"
   fi
 }
-
-zz() {
-  cd "$(_z -l 2>&1 | sed 's/^[0-9,.]* *//' | fzf -q "$_last_z_args")"
+zc() {
+  if [[ -z "$*" ]]; then
+    code "$(z -l 2>&1 | fzf +s --tac | sed 's/^[0-9,.]* *//')"
+  fi
 }
 
 # fh - repeat history
@@ -55,10 +55,7 @@ fe() {
   IFS=$'\n' files=($(filter | fzf-tmux --query="$1" --multi --select-1 --exit-0))
   [[ -n "$files" ]] && ${EDITOR:-vim} "${files[@]}"
 }
-fcode() {
-  IFS=$'\n' files=($(filter | fzf-tmux --query="$1" --multi --select-1 --exit-0))
-  [[ -n "$files" ]] && code ${files[@]}
-}
+
 # cc - copy files
 cc() {
   IFS=$'\n' files=($(filter | fzf-tmux --query="$1" --multi --select-1 --exit-0))
